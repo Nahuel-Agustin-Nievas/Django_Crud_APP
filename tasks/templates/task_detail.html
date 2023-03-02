@@ -3,27 +3,44 @@
 
 {% block content %}
 
-<h1>{{task.title}}</h1>
+<main class="container">
 
-{{error}}
-<form method="post">
+    <div class="row">
 
-    {% csrf_token %}
-    {{form.as_p}}
+        <div class="col-md-4 offset-md-4">
 
-    <button> Update</button>
-</form>
-<form action="{% url 'complete_task' task.id %}" method="post">
-    {% csrf_token %}
+            <h1 class="text-secondary">{{task.title}}</h1>
 
-    <button>Complete</button>
-</form>
+            {{error}}
+
+            <div class="mt-5 justify-content-between">
+
+                <form method="post">
+
+                    {% csrf_token %}
+                    {{form.as_p}}
+    
+                    <button class="btn btn-primary mt-1"> Update</button>
+                </form>
+                <form action="{% url 'complete_task' task.id %}" method="post">
+                    {% csrf_token %}
+    
+                    <button class="btn btn-secondary mt-1">Complete</button>
+                </form>
+    
+    
+                <form action="{% url 'delete_task' task.id %}" method="post">
+                    {% csrf_token %}
+    
+                    <button class="btn btn-danger mt-1">Delete</button>
+                </form>
 
 
-<form action="{% url 'delete_task' task.id %}" method="post">
-    {% csrf_token %}
+            </div>
+           
+        </div>
+    </div>
+</main>
 
-    <button>Delete</button>
-</form>
 
 {% endblock %}
